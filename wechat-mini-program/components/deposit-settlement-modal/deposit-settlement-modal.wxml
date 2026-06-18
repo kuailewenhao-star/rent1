@@ -1,0 +1,110 @@
+<!--
+  押金结算弹窗组件
+  功能说明：退租时押金结算，支持全额退还和扣费退还
+  交互逻辑：选择结算方式，填写退还金额和扣费备注
+-->
+<view class="modal-wrapper" wx:if="{{show}}" bindtap="onClose">
+  <view class="modal-content modal" catchtap="preventBubble">
+    <!-- 标题 -->
+    <view class="modal-header">
+      <text class="modal-title">押金结算</text>
+      <text class="modal-close" bindtap="onClose">×</text>
+    </view>
+
+    <!-- 内容 -->
+    <view class="modal-body">
+      <!-- 原始押金信息 -->
+      <view class="deposit-info">
+        <view class="deposit-label">原押金金额</view>
+        <view class="deposit-amount">¥{{originalDeposit}}</view>
+      </view>
+
+      <!-- 结算方式 -->
+      <view class="form-item">
+        <view class="form-label required">结算方式</view>
+        <view class="type-selector">
+          <view
+            class="type-option {{settlementType === 'full' ? 'selected' : ''}}"
+            bindtap="onSelectType"
+            data-type="full"
+          >
+            <view class="type-icon">✓</view>
+            <view class="type-name">全额退还</view>
+            <view class="type-desc">无违约，正常退还全部押金</view>
+          </view>
+          <view
+            class="type-option {{settlementType === 'partial' ? 'selected' : ''}}"
+            bindtap="onSelectType"
+            data-type="partial"
+          >
+            <view class="type-icon">-</view>
+            <view class="type-name">扣费退还</view>
+            <view class="type-desc">存在欠费或损坏，需扣减</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 扣费信息（仅扣费退还时显示） -->
+      <view class="form-item" wx:if="{{settlementType === 'partial'}}">
+        <view class="form-label required">实际退还金额</view>
+        <view class="amount-input">
+          <text class="amount-prefix">¥</text>
+          <input
+            class="input amount-value"
+            type="digit"
+            placeholder="0.00"
+            value="{{refundAmount}}"
+            bindinput="onAmountInput"
+          />
+        </view>
+        <view class="form-tip">应退金额不能超过原押金金额</view>
+      </view>
+
+      <!-- 扣费详情（仅扣费退还时显示） -->
+      <view class="form-item" wx:if="{{settlementType === 'partial'}}">
+        <view class="form-label required">扣费说明</view>
+        <view class="deduction-items">
+          <view
+            wx:for="{{deductionItems}}"
+            wx:key="id"
+            class="deduction-item"
+          >
+            <view class="deduction-info">
+              <text class="deduction-name">{{item.name}}</text>
+              <text class="deduction-amount">-¥{{item.amount}}</text>
+            </view>
+            <view class="deduction-reason text-secondary text-xs">{{item.reason}}</view>
+          </view>
+          <view class="add-deduction" bindtap="onAddDeduction">
+            <text class="add-icon">+</text>
+            <text>添加扣费项</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 备注 -->
+      <view class="form-item">
+        <view class="form-label">结算备注</view>
+        <textarea
+          class="remark-input"
+          placeholder="请输入结算备注（选填）"
+          value="{{remark}}"
+          bindinput="onRemarkInput"
+          maxlength="200"
+        ></textarea>
+      </view>
+    </view>
+
+    <!-- 底部按钮 -->
+    <view class="modal-footer">
+      <button class="btn btn-default" bindtap="onClose">取消</button>
+      <button
+        class="btn btn-primary"
+        bindtap="onConfirm"
+        disabled="{{!canConfirm}}"
+      >
+        确认结算
+      </button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,142 @@
+<!--
+  收入账单列表页面
+  功能说明：展示收入账单，支持按状态、时间、房源筛选
+  交互逻辑：点击账单跳转详情，支持手动录入账单
+  特殊业务限制：
+    - 租客端仅展示个人账单
+    - 账单状态：待支付/已支付/逾期未付
+    - 仅房东端支持手动录入杂费账单
+    - 租客端可查看账单但不可录入
+-->
+<view class="page-container">
+  <!-- 状态筛选 -->
+  <view class="status-filter">
+    <view
+      wx:for="{{statusFilters}}"
+      wx:key="id"
+      class="filter-btn {{currentStatus === item.id ? 'active' : ''}}"
+      bindtap="onStatusChange"
+      data-id="{{item.id}}"
+    >
+      {{item.name}}
+      <text class="filter-count" wx:if="{{item.count > 0}}">{{item.count}}</text>
+    </view>
+  </view>
+
+  <!-- 时间筛选 -->
+  <view class="time-filter">
+    <view class="time-tabs">
+      <view
+        wx:for="{{timeFilters}}"
+        wx:key="id"
+        class="time-tab {{currentTimeFilter === item.id ? 'active' : ''}}"
+        bindtap="onTimeFilterChange"
+        data-id="{{item.id}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+    <view class="custom-time" bindtap="onCustomTimeSelect">
+      <text class="custom-icon">📅</text>
+      <text class="custom-text">{{currentPeriodText}}</text>
+    </view>
+  </view>
+
+  <!-- 汇总信息 -->
+  <view class="bill-summary" wx:if="{{currentStatus === 'all' || currentStatus === 'pending'}}">
+    <view class="summary-item">
+      <view class="summary-label">待收金额</view>
+      <view class="summary-value text-warning">¥{{summary.pendingAmount}}</view>
+    </view>
+    <view class="summary-item" wx:if="{{currentStatus === 'all'}}">
+      <view class="summary-label">逾期金额</view>
+      <view class="summary-value text-danger">¥{{summary.overdueAmount}}</view>
+    </view>
+  </view>
+
+  <!-- 账单列表 -->
+  <view class="bill-list">
+    <view
+      wx:for="{{billList}}"
+      wx:key="id"
+      class="bill-item"
+      bindtap="goToDetail"
+      data-id="{{item.id}}"
+    >
+      <!-- 账单头部 -->
+      <view class="bill-header">
+        <view class="bill-type">
+          <view class="type-icon {{item.typeClass}}">{{item.typeIcon}}</view>
+          <view class="type-info">
+            <text class="type-name">{{item.typeName}}</text>
+            <text class="type-cycle text-secondary text-xs">{{item.periodText}}</text>
+          </view>
+        </view>
+        <view class="bill-amount {{item.statusClass}}">¥{{item.amount}}</view>
+      </view>
+
+      <!-- 账单详情 -->
+      <view class="bill-detail">
+        <view class="detail-row">
+          <text class="detail-label">房间</text>
+          <text class="detail-value">{{item.roomName}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-label">租客</text>
+          <text class="detail-value privacy-mask">{{item.tenantName}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-label">周期</text>
+          <text class="detail-value">{{item.periodStart}} 至 {{item.periodEnd}}</text>
+        </view>
+      </view>
+
+      <!-- 账单状态 -->
+      <view class="bill-footer">
+        <view class="bill-status {{item.statusClass}}">
+          <view class="status-dot"></view>
+          <text>{{item.statusName}}</text>
+        </view>
+        <text class="bill-date text-xs text-secondary">{{item.createTime}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{billList.length === 0}}">
+    <text class="empty-state-icon">📭</text>
+    <text class="empty-state-text">暂无账单</text>
+  </view>
+
+  <!-- 添加按钮（仅房东显示） -->
+  <view class="add-btn" bindtap="goToAddBill" wx:if="{{isLandlord}}">
+    <text class="add-btn-icon">+</text>
+  </view>
+</view>
+
+<!-- 时间筛选弹窗 -->
+<view class="picker-modal" wx:if="{{showTimePicker}}">
+  <view class="picker-mask" bindtap="onCloseTimePicker"></view>
+  <view class="picker-content modal">
+    <view class="picker-header">
+      <text class="picker-title">选择时间范围</text>
+      <text class="picker-close" bindtap="onCloseTimePicker">×</text>
+    </view>
+    <view class="picker-body">
+      <view class="time-options">
+        <view
+          wx:for="{{timeFilters}}"
+          wx:key="id"
+          class="time-option {{currentTimeFilter === item.id ? 'selected' : ''}}"
+          bindtap="onTimeFilterChange"
+          data-id="{{item.id}}"
+        >
+          {{item.name}}
+        </view>
+      </view>
+      <view class="custom-option" bindtap="onCustomTimeSelect">
+        <text>自定义时间</text>
+      </view>
+    </view>
+  </view>
+</view>

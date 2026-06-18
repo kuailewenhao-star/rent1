@@ -1,0 +1,169 @@
+@import './variables.scss';
+
+// 全局样式重置
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  font-size: $font-size-base;
+  color: $color-text-primary;
+  background-color: $color-bg-page;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  height: 100%;
+}
+
+// 通用工具类
+// 文字省略
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Flex布局
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// 卡片容器
+.card-container {
+  background-color: $color-bg-card;
+  border-radius: $border-radius-card;
+  padding: $spacing-xl;
+  box-shadow: $shadow-sm;
+}
+
+// 页面标题
+.page-header {
+  margin-bottom: $spacing-xl;
+
+  .page-title {
+    font-size: $font-size-xxl;
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  .page-subtitle {
+    margin-top: $spacing-sm;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+}
+
+// 状态标签
+.status-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: $border-radius-tag;
+  font-size: $font-size-xs;
+  font-weight: 500;
+
+  &.status-active {
+    background-color: $color-success-bg;
+    color: $color-success;
+  }
+
+  &.status-inactive {
+    background-color: $color-bg-stripe;
+    color: $color-text-secondary;
+  }
+
+  &.status-warning {
+    background-color: $color-warning-bg;
+    color: $color-warning;
+  }
+
+  &.status-danger {
+    background-color: $color-danger-bg;
+    color: $color-danger;
+  }
+}
+
+// Element Plus 覆盖样式
+.el-button {
+  border-radius: $border-radius-button !important;
+}
+
+.el-input__wrapper {
+  border-radius: $border-radius-input !important;
+}
+
+.el-select .el-input__wrapper {
+  border-radius: $border-radius-input !important;
+}
+
+.el-dialog {
+  border-radius: $border-radius-card !important;
+}
+
+.el-table {
+  border-radius: $border-radius-card !important;
+
+  th.el-table__cell {
+    background-color: $color-bg-page !important;
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  tr:hover > td.el-table__cell {
+    background-color: $color-bg-hover !important;
+  }
+}
+
+// 分页容器
+.pagination-container {
+  margin-top: $spacing-xl;
+  display: flex;
+  justify-content: flex-end;
+}
+
+// 空状态
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xxl * 2;
+
+  .empty-icon {
+    font-size: 48px;
+    color: $color-text-placeholder;
+    margin-bottom: $spacing-lg;
+  }
+
+  .empty-text {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+}
+
+// 加载状态
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}

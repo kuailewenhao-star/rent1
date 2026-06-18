@@ -1,0 +1,313 @@
+/* 房间列表页面 - 样式文件 */
+
+/* 顶部统计 */
+.room-stats {
+  display: flex;
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+  border-right: 1rpx solid var(--border-light);
+}
+
+.stat-item:last-child {
+  border-right: none;
+}
+
+.stat-num {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6rpx;
+}
+
+.stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* 筛选栏 */
+.filter-bar {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) 0;
+  margin-bottom: var(--spacing-sm);
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 20rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.filter-item:active {
+  background: var(--secondary-gray);
+}
+
+.filter-text.placeholder {
+  color: var(--text-placeholder);
+}
+
+.filter-arrow {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.filter-search {
+  padding: 12rpx 24rpx;
+}
+
+.filter-icon {
+  font-size: var(--font-size-base);
+}
+
+/* 房间列表 */
+.room-list {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.room-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+  transition: background 0.2s ease;
+}
+
+.room-item:last-child {
+  border-bottom: none;
+}
+
+.room-item:active {
+  background: var(--bg-hover);
+}
+
+/* 房间图片 */
+.room-image {
+  position: relative;
+  width: 160rpx;
+  height: 120rpx;
+  border-radius: var(--radius-input);
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-right: var(--spacing-md);
+}
+
+.room-image image {
+  width: 100%;
+  height: 100%;
+}
+
+.room-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-gray);
+  color: var(--text-placeholder);
+  font-size: var(--font-size-xs);
+}
+
+.room-status-tag {
+  position: absolute;
+  top: 8rpx;
+  left: 8rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+  font-size: var(--font-size-xs);
+  color: #fff;
+}
+
+.room-status-tag.status-vacant {
+  background: var(--primary-color);
+}
+
+.room-status-tag.status-rented {
+  background: var(--accent-green);
+}
+
+.room-expiring-tag {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+  font-size: var(--font-size-xs);
+  background: var(--accent-orange);
+  color: #fff;
+}
+
+/* 房间信息 */
+.room-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.room-name {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.room-monthlyRent {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--accent-red);
+}
+
+.room-property {
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.room-tenant {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: 6rpx;
+}
+
+.tenant-name {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+.tenant-phone {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.room-contract {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* 箭头 */
+.room-arrow {
+  flex-shrink: 0;
+  color: var(--text-placeholder);
+  font-size: var(--font-size-lg);
+}
+
+/* 添加按钮 */
+.add-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 200rpx;
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 8rpx 24rpx rgba(91, 155, 213, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.add-btn:active {
+  transform: scale(0.9);
+}
+
+.add-btn-icon {
+  font-size: 60rpx;
+  color: #fff;
+  font-weight: 300;
+}
+
+/* 弹窗样式 */
+.picker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.picker-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.picker-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.picker-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.picker-close {
+  font-size: 48rpx;
+  color: var(--text-placeholder);
+  line-height: 1;
+}
+
+.picker-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-sm) 0;
+}
+
+.picker-item {
+  padding: var(--spacing-md);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.picker-item:active {
+  background: var(--secondary-gray);
+}
+
+.picker-item.selected {
+  color: var(--primary-color);
+  font-weight: 600;
+}

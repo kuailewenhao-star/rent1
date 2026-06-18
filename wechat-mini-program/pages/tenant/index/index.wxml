@@ -1,0 +1,107 @@
+<!--
+  租客首页页面
+  功能说明：展示所租房源信息、房间信息、合约信息、本人账单
+  权限控制：仅租客端可见
+-->
+<view class="page-container">
+
+  <!-- 角色切换提示（仅多身份用户显示） -->
+  <view class="role-tip" wx:if="{{showRoleTip}}">
+    <text class="role-tip-text">当前为租客身份</text>
+    <text class="role-tip-switch" bindtap="switchToLandlord">切换房东</text>
+  </view>
+
+  <!-- 顶部：房源 & 房间信息卡片 -->
+  <view class="rental-card" bindtap="goToRoomDetail">
+    <view class="rental-header">
+      <view class="property-icon">🏠</view>
+      <view class="property-info">
+        <text class="property-name">{{propertyInfo.name}}</text>
+        <text class="property-address">{{propertyInfo.address}}</text>
+      </view>
+      <view class="property-tag">{{propertyInfo.type}}</view>
+    </view>
+    <view class="rental-body">
+      <view class="rental-item">
+        <text class="rental-label">房间</text>
+        <text class="rental-value">{{roomInfo.name}}</text>
+      </view>
+      <view class="rental-divider"></view>
+      <view class="rental-item">
+        <text class="rental-label">月租</text>
+        <text class="rental-value text-primary-color">¥{{roomInfo.monthlyRent}}</text>
+      </view>
+      <view class="rental-divider"></view>
+      <view class="rental-item">
+        <text class="rental-label">押金</text>
+        <text class="rental-value">¥{{roomInfo.deposit}}</text>
+      </view>
+      <view class="rental-divider"></view>
+      <view class="rental-item">
+        <text class="rental-label">面积</text>
+        <text class="rental-value">{{roomInfo.area}}㎡</text>
+      </view>
+    </view>
+    <view class="rental-footer">
+      <text class="rental-more">查看房间详情 ›</text>
+    </view>
+  </view>
+
+  <!-- 合约信息卡片 -->
+  <view class="contract-card" bindtap="goToContractDetail">
+    <view class="card-header">
+      <text class="card-title">我的合约</text>
+      <text class="contract-status tag-success">
+        {{contract.statusName}}
+      </text>
+    </view>
+    <view class="contract-period">
+      <text class="period-label">租期</text>
+      <text class="period-value">{{contract.startDate}} 至 {{contract.endDate}}</text>
+    </view>
+    <view class="contract-remaining">
+      <view class="remaining-left">
+        <text class="remaining-big">{{contract.remainingDays}}</text>
+        <text class="remaining-unit">天</text>
+      </view>
+      <text class="remaining-desc">剩余租期</text>
+    </view>
+  </view>
+
+  <!-- 账单提醒卡片 -->
+  <view class="bill-section">
+    <view class="section-header">
+      <text class="card-title">我的账单</text>
+      <text class="section-link" bindtap="goToBillList">全部 ›</text>
+    </view>
+    <view class="bill-grid">
+      <view class="bill-card" bindtap="goToPendingBills">
+        <view class="bill-count">{{billStats.pendingCount}}</view>
+        <view class="bill-label">待支付</view>
+        <view class="bill-amount">¥{{billStats.pendingAmount}}</view>
+      </view>
+      <view class="bill-card bill-card-danger" bindtap="goToOverdueBills">
+        <view class="bill-count">{{billStats.overdueCount}}</view>
+        <view class="bill-label">逾期</view>
+        <view class="bill-amount">¥{{billStats.overdueAmount}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-menu">
+    <view class="menu-item" bindtap="goToContact">
+      <view class="menu-icon">📞</view>
+      <text class="menu-title">联系房东</text>
+    </view>
+    <view class="menu-item" bindtap="goToMessages">
+      <view class="menu-icon">🔔</view>
+      <text class="menu-title">消息</text>
+      <view class="menu-badge" wx:if="{{unreadCount > 0}}">{{unreadCount}}</view>
+    </view>
+    <view class="menu-item" bindtap="goToMine">
+      <view class="menu-icon">👤</view>
+      <text class="menu-title">我的</text>
+    </view>
+  </view>
+</view>

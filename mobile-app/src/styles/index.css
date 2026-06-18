@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-surface-soft text-ink font-sans text-[14px];
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  button {
+    @apply outline-none;
+  }
+  button:active {
+    transform: scale(0.97);
+    transition: transform 0.12s ease;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-surface rounded-card shadow-card;
+  }
+  .tag-pill {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[12px] font-medium;
+  }
+  .brand-gradient {
+    background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #4f46e5 100%);
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .tap-feedback {
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+  .tap-feedback:active {
+    transform: scale(0.98);
+    background-color: rgba(37, 99, 235, 0.08);
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: max(88px, env(safe-area-inset-bottom));
+  }
+}

@@ -1,0 +1,102 @@
+<!--
+  租客账单列表页面
+  功能说明：展示租客个人账单，支持按状态筛选
+  权限控制：仅租客角色可见；仅展示本人账单
+-->
+<view class="page-container">
+  <!-- 状态筛选 -->
+  <view class="status-filter">
+    <view
+      wx:for="{{statusFilters}}"
+      wx:key="id"
+      class="filter-btn {{currentStatus === item.id ? 'active' : ''}}"
+      bindtap="onStatusChange"
+      data-id="{{item.id}}"
+    >
+      {{item.name}}
+      <text class="filter-count" wx:if="{{item.count > 0}}">{{item.count}}</text>
+    </view>
+  </view>
+
+  <!-- 汇总信息 -->
+  <view class="bill-summary" wx:if="{{currentStatus === 'all' || currentStatus === 'pending'}}">
+    <view class="summary-item">
+      <view class="summary-label">待付总额</view>
+      <view class="summary-value">¥{{summary.pendingAmount}}</view>
+    </view>
+    <view class="summary-item" wx:if="{{currentStatus === 'all'}}">
+      <view class="summary-label">逾期金额</view>
+      <view class="summary-value summary-danger">¥{{summary.overdueAmount}}</view>
+    </view>
+  </view>
+
+  <!-- 账单列表 -->
+  <view class="bill-list">
+    <view
+      wx:for="{{billList}}"
+      wx:key="id"
+      class="bill-item"
+      bindtap="goToDetail"
+      data-id="{{item.id}}"
+    >
+      <!-- 账单头部 -->
+      <view class="bill-header">
+        <view class="bill-type">
+          <view class="type-icon type-{{item.type}}">{{item.typeName}}</view>
+          <view class="type-info">
+            <text class="type-name">{{item.typeName}}</text>
+            <text class="type-cycle">{{item.periodText}}</text>
+          </view>
+        </view>
+        <view class="bill-amount status-{{item.status}}">¥{{item.amount}}</view>
+      </view>
+
+      <!-- 账单详情 -->
+      <view class="bill-detail">
+        <view class="detail-row">
+          <text class="detail-label">房间</text>
+          <text class="detail-value">{{item.roomName}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-label">周期</text>
+          <text class="detail-value">{{item.periodStart}} 至 {{item.periodEnd}}</text>
+        </view>
+      </view>
+
+      <!-- 账单状态 + 支付按钮 -->
+      <view class="bill-footer">
+        <view class="bill-status status-{{item.status}}">{{item.statusName}}</view>
+        <text class="bill-date">{{item.createTime}}</text>
+        <view class="bill-action" wx:if="{{item.status === 'pending'}}" catchtap="onPayBill" data-id="{{item.id}}">
+          立即支付
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{billList.length === 0}}">
+    <text class="empty-state-icon">📭</text>
+    <text class="empty-state-text">暂无账单</text>
+  </view>
+</view>
+
+<!-- 支付弹窗 -->
+<view class="picker-modal" wx:if="{{showPayModal}}">
+  <view class="picker-mask" bindtap="onClosePayModal"></view>
+  <view class="modal-content modal">
+    <view class="modal-header">
+      <text class="modal-title">确认支付</text>
+      <text class="modal-close" bindtap="onClosePayModal">×</text>
+    </view>
+    <view class="modal-body">
+      <view class="pay-amount">¥{{selectedBill.amount}}</view>
+      <view class="pay-type">{{selectedBill.typeName}}</view>
+      <view class="pay-period text-secondary">{{selectedBill.periodText}}</view>
+    </view>
+    <view class="modal-footer">
+      <view class="pay-tip">请通过微信转账给房东完成支付</view>
+      <button class="btn btn-primary btn-block" bindtap="confirmPay">确认支付</button>
+    </view>
+  </view>
+</view>

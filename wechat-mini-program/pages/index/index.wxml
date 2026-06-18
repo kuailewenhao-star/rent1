@@ -1,0 +1,148 @@
+<!--
+  房东首页 - 数据看板页面
+  功能说明：聚合展示房源经营核心数据，支持时间维度筛选（今日/本月/季度/年度/自定义）
+  交互逻辑：点击卡片跳转对应明细列表
+  特殊业务限制：仅房东端可见，租客端自动屏蔽
+-->
+<view class="page-container">
+  <!-- 角色切换提示（仅多身份用户显示） -->
+  <view class="role-tip" wx:if="{{showRoleTip}}">
+    <text class="role-tip-text">当前为房东身份</text>
+    <text class="role-tip-switch" bindtap="switchToTenant">切换租客</text>
+  </view>
+
+  <!-- 时间筛选器 -->
+  <view class="time-filter">
+    <view class="time-filter-list">
+      <view
+        wx:for="{{timeFilters}}"
+        wx:key="id"
+        class="time-filter-item {{currentTimeFilter === item.id ? 'active' : ''}}"
+        bindtap="onTimeFilterChange"
+        data-id="{{item.id}}"
+      >
+        {{item.name}}
+      </view>
+      <view
+        class="time-filter-item {{currentTimeFilter === 'custom' ? 'active' : ''}}"
+        bindtap="onCustomTimeSelect"
+      >
+        自定义
+      </view>
+    </view>
+  </view>
+
+  <!-- 账单数据区域 -->
+  <view class="section-title">账单数据</view>
+  <view class="stats-grid stats-grid-3">
+    <!-- 待支付账单 -->
+    <view class="stat-card" bindtap="goToPendingBills">
+      <view class="stat-value text-warning">{{stats.pendingCount}}</view>
+      <view class="stat-label">待支付账单</view>
+    </view>
+    <!-- 待支付金额 -->
+    <view class="stat-card" bindtap="goToPendingBills">
+      <view class="stat-value text-primary-color">¥{{stats.pendingAmount}}</view>
+      <view class="stat-label">待支付金额</view>
+    </view>
+    <!-- 逾期账单 -->
+    <view class="stat-card stat-card-danger" bindtap="goToOverdueBills">
+      <view class="stat-value">{{stats.overdueCount}}</view>
+      <view class="stat-label">逾期账单</view>
+    </view>
+  </view>
+
+  <view class="stats-grid stats-grid-2 mt-md">
+    <!-- 逾期金额 -->
+    <view class="stat-card stat-card-danger" bindtap="goToOverdueBills">
+      <view class="stat-value">¥{{stats.overdueAmount}}</view>
+      <view class="stat-label">逾期金额</view>
+    </view>
+    <!-- 当前持有押金 -->
+    <view class="stat-card stat-card-success">
+      <view class="stat-value text-success">¥{{stats.currentDeposit}}</view>
+      <view class="stat-label">当前持有押金</view>
+    </view>
+  </view>
+
+  <!-- 房间房源数据区域 -->
+  <view class="section-title mt-lg">房间房源</view>
+  <view class="stats-grid stats-grid-4">
+    <!-- 总房间数 -->
+    <view class="stat-card" bindtap="goToRoomList">
+      <view class="stat-value text-primary-color">{{roomStats.totalCount}}</view>
+      <view class="stat-label">总房间数</view>
+    </view>
+    <!-- 已出租 -->
+    <view class="stat-card stat-card-success" bindtap="goToRentedRooms">
+      <view class="stat-value">{{roomStats.rentedCount}}</view>
+      <view class="stat-label">已出租</view>
+    </view>
+    <!-- 空置中 -->
+    <view class="stat-card" bindtap="goToVacantRooms">
+      <view class="stat-value">{{roomStats.vacantCount}}</view>
+      <view class="stat-label">空置中</view>
+    </view>
+    <!-- 即将到期 -->
+    <view class="stat-card stat-card-warning" bindtap="goToExpiringRooms">
+      <view class="stat-value">{{roomStats.expiringCount}}</view>
+      <view class="stat-label">即将到期</view>
+    </view>
+  </view>
+
+  <!-- 经营盈利数据区域 -->
+  <view class="section-title mt-lg">经营盈利</view>
+  <view class="profit-card">
+    <view class="profit-header">
+      <text class="profit-title">房源盈利概览</text>
+      <text class="profit-period">{{currentPeriodText}}</text>
+    </view>
+    <view class="profit-content">
+      <view class="profit-item">
+        <view class="profit-label">总收入</view>
+        <view class="profit-value text-success">¥{{profitStats.totalIncome}}</view>
+      </view>
+      <view class="profit-item">
+        <view class="profit-label">总支出</view>
+        <view class="profit-value text-danger">¥{{profitStats.totalExpense}}</view>
+      </view>
+      <view class="profit-divider"></view>
+      <view class="profit-item profit-item-result">
+        <view class="profit-label">实时盈利</view>
+        <view class="profit-value {{profitStats.profit >= 0 ? 'text-success' : 'text-danger'}}">
+          ¥{{profitStats.profit}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷操作入口 -->
+  <view class="section-title mt-lg">快捷操作</view>
+  <view class="quick-actions">
+    <view class="quick-action-item" bindtap="goToAddProperty">
+      <view class="quick-action-icon">+</view>
+      <view class="quick-action-text">添加房源</view>
+    </view>
+    <view class="quick-action-item" bindtap="goToAddRoom">
+      <view class="quick-action-icon">+</view>
+      <view class="quick-action-text">添加房间</view>
+    </view>
+    <view class="quick-action-item" bindtap="goToAddContract">
+      <view class="quick-action-icon">+</view>
+      <view class="quick-action-text">新建合约</view>
+    </view>
+    <view class="quick-action-item" bindtap="goToAddExpense">
+      <view class="quick-action-icon">+</view>
+      <view class="quick-action-text">录入支出</view>
+    </view>
+  </view>
+
+  <!-- 消息提醒入口 -->
+  <view class="message-entry" bindtap="goToMessages">
+    <view class="message-entry-left">
+      <view class="message-icon" wx:if="{{unreadCount > 0}}">{{unreadCount}}</view>
+      <text class="message-title">消息提醒</text>
+    </view>
+    <view class="list-item-arrow">›</view>
+  </view>
+</view>

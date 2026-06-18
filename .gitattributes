@@ -1,0 +1,104 @@
+# ============================================
+# .gitattributes - Git 属性配置
+# 统一项目中所有文件的行结束符和文本处理
+# ============================================
+
+# 默认所有文本文件使用 LF 行结束符（Git 会在提交时自动转换）
+* text=auto eol=lf
+
+# ============================================
+# 源码类文件 - 强制 LF
+# ============================================
+*.java       text eol=lf
+*.xml        text eol=lf
+*.yml        text eol=lf
+*.yaml       text eol=lf
+*.properties text eol=lf
+*.sql        text eol=lf
+
+*.ts         text eol=lf
+*.tsx        text eol=lf
+*.js         text eol=lf
+*.jsx        text eol=lf
+*.vue        text eol=lf
+*.json       text eol=lf
+*.jsonc      text eol=lf
+*.css        text eol=lf
+*.scss       text eol=lf
+*.sass       text eol=lf
+*.less       text eol=lf
+*.html       text eol=lf
+*.md         text eol=lf
+*.sh         text eol=lf
+
+# 微信小程序
+*.wxml       text eol=lf
+*.wxss       text eol=lf
+*.wxs        text eol=lf
+
+# 配置类
+*.conf       text eol=lf
+*.cfg        text eol=lf
+*.ini        text eol=lf
+*.env        text eol=lf
+.env.*       text eol=lf
+
+# ============================================
+# Windows 批处理 - 强制 CRLF（Windows 环境）
+# ============================================
+*.bat        text eol=crlf
+*.cmd        text eol=crlf
+*.ps1        text eol=crlf
+
+# ============================================
+# 二进制文件 - 不做文本转换
+# ============================================
+*.png        binary
+*.jpg        binary
+*.jpeg       binary
+*.gif        binary
+*.bmp        binary
+*.ico        binary
+*.webp       binary
+*.svg        text
+
+*.pdf        binary
+*.doc        binary
+*.docx       binary
+*.xls        binary
+*.xlsx       binary
+*.ppt        binary
+*.pptx       binary
+*.zip        binary
+*.tar        binary
+*.gz         binary
+*.rar        binary
+*.7z         binary
+
+*.class      binary
+*.jar        binary
+*.war        binary
+*.ear        binary
+*.so         binary
+*.dll        binary
+*.dylib      binary
+
+# 字体
+*.ttf        binary
+*.woff       binary
+*.woff2      binary
+*.otf        binary
+*.eot        binary
+
+# 音频/视频
+*.mp3        binary
+*.mp4        binary
+*.flv        binary
+*.avi        binary
+*.mov        binary
+
+# ============================================
+# 特殊文件 - 语言标注
+# ============================================
+*.sql        linguist-language=SQL
+Dockerfile   linguist-language=Dockerfile

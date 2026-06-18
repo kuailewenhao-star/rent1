@@ -1,0 +1,128 @@
+<!--
+  支出账单列表页面
+  功能说明：展示房东支出账单，支持按房源、时间筛选
+  交互逻辑：点击账单跳转详情，支持手动录入支出
+  特殊业务限制：
+    - 仅房东端可见，租客端完全屏蔽
+    - 无账单状态（仅台账记录）
+    - 无自动生成机制，仅手动录入
+    - 关联维度为【房源ID+房东用户ID】
+-->
+<view class="page-container">
+  <!-- 汇总信息 -->
+  <view class="expense-summary">
+    <view class="summary-card">
+      <view class="summary-label">累计支出</view>
+      <view class="summary-value text-danger">¥{{summary.totalExpense}}</view>
+    </view>
+    <view class="summary-card">
+      <view class="summary-label">本月支出</view>
+      <view class="summary-value">¥{{summary.monthExpense}}</view>
+    </view>
+  </view>
+
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <view class="filter-item" bindtap="onShowPropertyPicker">
+      <text class="filter-text {{selectedPropertyId ? '' : 'placeholder'}}">
+        {{selectedPropertyName || '全部房源'}}
+      </text>
+      <text class="filter-arrow">▼</text>
+    </view>
+    <view class="filter-item" bindtap="onShowTimePicker">
+      <text class="filter-text">{{currentPeriodText}}</text>
+      <text class="filter-arrow">▼</text>
+    </view>
+  </view>
+
+  <!-- 支出列表 -->
+  <view class="expense-list">
+    <view
+      wx:for="{{expenseList}}"
+      wx:key="id"
+      class="expense-item"
+      bindtap="goToDetail"
+      data-id="{{item.id}}"
+    >
+      <!-- 支出类型图标 -->
+      <view class="expense-type-icon {{item.typeClass}}">
+        {{item.typeIcon}}
+      </view>
+
+      <!-- 支出信息 -->
+      <view class="expense-info">
+        <view class="expense-header">
+          <text class="expense-type-name">{{item.typeName}}</text>
+          <text class="expense-amount">-¥{{item.amount}}</text>
+        </view>
+        <view class="expense-detail">
+          <text class="expense-property">{{item.propertyName}}</text>
+          <text class="expense-date">{{item.costDate}}</text>
+        </view>
+        <view class="expense-remark" wx:if="{{item.remark}}">
+          {{item.remark}}
+        </view>
+      </view>
+
+      <view class="expense-arrow list-item-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{expenseList.length === 0}}">
+    <text class="empty-state-icon">💸</text>
+    <text class="empty-state-text">暂无支出记录</text>
+    <button class="btn btn-primary" bindtap="goToAddExpense">录入第一笔支出</button>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="goToAddExpense" wx:if="{{expenseList.length > 0}}">
+    <text class="add-btn-icon">+</text>
+  </view>
+</view>
+
+<!-- 房源选择弹窗 -->
+<view class="picker-modal" wx:if="{{showPropertyPicker}}">
+  <view class="picker-mask" bindtap="onClosePropertyPicker"></view>
+  <view class="picker-content modal">
+    <view class="picker-header">
+      <text class="picker-title">选择房源</text>
+      <text class="picker-close" bindtap="onClosePropertyPicker">×</text>
+    </view>
+    <scroll-view scroll-y class="picker-list">
+      <view
+        class="picker-item {{selectedPropertyId === item.id ? 'selected' : ''}}"
+        wx:for="{{propertyList}}"
+        wx:key="id"
+        bindtap="onSelectProperty"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+      >
+        {{item.name}}
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<!-- 时间选择弹窗 -->
+<view class="picker-modal" wx:if="{{showTimePicker}}">
+  <view class="picker-mask" bindtap="onCloseTimePicker"></view>
+  <view class="picker-content modal">
+    <view class="picker-header">
+      <text class="picker-title">选择时间</text>
+      <text class="picker-close" bindtap="onCloseTimePicker">×</text>
+    </view>
+    <view class="picker-list">
+      <view
+        class="picker-item {{currentTimeFilter === item.id ? 'selected' : ''}}"
+        wx:for="{{timeFilters}}"
+        wx:key="id"
+        bindtap="onSelectTime"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+</view>

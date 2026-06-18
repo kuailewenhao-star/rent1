@@ -1,0 +1,142 @@
+/* 解约弹窗组件 - 样式文件 */
+
+/* 弹窗包装器 */
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  width: 640rpx;
+  max-height: 80vh;
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 头部 */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.modal-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  font-size: 48rpx;
+  color: var(--text-placeholder);
+  line-height: 1;
+}
+
+/* 内容区域 */
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+}
+
+.form-item {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.form-label.required::before {
+  content: '*';
+  color: var(--accent-red);
+  margin-right: 6rpx;
+}
+
+/* 类型选择 */
+.type-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+}
+
+.type-option {
+  padding: var(--spacing-md);
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  border: 4rpx solid transparent;
+  transition: all 0.2s ease;
+}
+
+.type-option.selected {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* 选择器 */
+.picker-value {
+  height: 80rpx;
+  padding: 0 var(--spacing-md);
+  display: flex;
+  align-items: center;
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+}
+
+.picker-value.placeholder {
+  color: var(--text-placeholder);
+}
+
+/* 备注输入 */
+.remark-input {
+  width: 100%;
+  min-height: 120rpx;
+  padding: var(--spacing-md);
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  box-sizing: border-box;
+  border: 2rpx solid transparent;
+}
+
+.remark-input:focus {
+  border-color: var(--primary-color);
+}
+
+/* 底部按钮 */
+.modal-footer {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border-top: 1rpx solid var(--border-light);
+}
+
+.modal-footer .btn {
+  flex: 1;
+}

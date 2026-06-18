@@ -1,0 +1,87 @@
+<!--
+  解约弹窗组件
+  功能说明：合约解约确认，支持选择解约原因
+  交互逻辑：选择解约原因，确认后触发解约流程
+-->
+<view class="modal-wrapper" wx:if="{{show}}" bindtap="onClose">
+  <view class="modal-content modal" catchtap="preventBubble">
+    <!-- 标题 -->
+    <view class="modal-header">
+      <text class="modal-title">{{title}}</text>
+      <text class="modal-close" bindtap="onClose">×</text>
+    </view>
+
+    <!-- 内容 -->
+    <view class="modal-body">
+      <!-- 解约类型 -->
+      <view class="form-item">
+        <view class="form-label required">解约类型</view>
+        <view class="type-selector">
+          <view
+            wx:for="{{terminationTypes}}"
+            wx:key="id"
+            class="type-option {{selectedType === item.id ? 'selected' : ''}}"
+            bindtap="onSelectType"
+            data-id="{{item.id}}"
+          >
+            {{item.name}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 解约原因 -->
+      <view class="form-item">
+        <view class="form-label required">解约原因</view>
+        <picker
+          mode="selector"
+          range="{{reasons}}"
+          range-key="name"
+          bindchange="onReasonChange"
+          value="{{selectedReasonIndex}}"
+        >
+          <view class="picker-value {{selectedReasonIndex >= 0 ? '' : 'placeholder'}}">
+            {{selectedReasonIndex >= 0 ? reasons[selectedReasonIndex].name : '请选择解约原因'}}
+          </view>
+        </picker>
+      </view>
+
+      <!-- 解约日期 -->
+      <view class="form-item">
+        <view class="form-label required">解约日期</view>
+        <picker
+          mode="date"
+          bindchange="onDateChange"
+          value="{{terminationDate}}"
+        >
+          <view class="picker-value {{terminationDate ? '' : 'placeholder'}}">
+            {{terminationDate || '请选择解约日期'}}
+          </view>
+        </picker>
+      </view>
+
+      <!-- 备注 -->
+      <view class="form-item">
+        <view class="form-label">备注说明</view>
+        <textarea
+          class="remark-input"
+          placeholder="请输入解约备注（选填）"
+          value="{{remark}}"
+          bindinput="onRemarkInput"
+          maxlength="200"
+        ></textarea>
+      </view>
+    </view>
+
+    <!-- 底部按钮 -->
+    <view class="modal-footer">
+      <button class="btn btn-default" bindtap="onClose">取消</button>
+      <button
+        class="btn btn-primary"
+        bindtap="onConfirm"
+        disabled="{{!canConfirm}}"
+      >
+        确认解约
+      </button>
+    </view>
+  </view>
+</view>

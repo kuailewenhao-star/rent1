@@ -1,0 +1,91 @@
+<!--
+  合约列表页面
+  功能说明：展示所有合约，支持按状态、房源、租客筛选
+  交互逻辑：点击合约卡片跳转详情，支持新建合约
+  特殊业务限制：
+    - 租客端仅展示个人合约
+    - 合约状态：履约中/已到期完结/提前解约/作废
+    - 已生效合约的计费规则永久锁定不可修改
+-->
+<view class="page-container">
+  <!-- 状态筛选 -->
+  <view class="status-tabs">
+    <view
+      wx:for="{{statusFilters}}"
+      wx:key="id"
+      class="status-tab {{currentStatus === item.id ? 'active' : ''}}"
+      bindtap="onStatusChange"
+      data-id="{{item.id}}"
+    >
+      {{item.name}}
+      <view class="tab-count" wx:if="{{item.count > 0}}">{{item.count}}</view>
+    </view>
+  </view>
+
+  <!-- 合约列表 -->
+  <view class="contract-list">
+    <view
+      wx:for="{{contractList}}"
+      wx:key="id"
+      class="contract-item"
+      bindtap="goToDetail"
+      data-id="{{item.id}}"
+    >
+      <!-- 合约头部 -->
+      <view class="contract-header">
+        <view class="contract-room">
+          <text class="room-name">{{item.roomName}}</text>
+          <view class="contract-status tag {{item.statusClass}}">{{item.statusName}}</view>
+        </view>
+        <view class="contract-property text-secondary text-sm">
+          {{item.propertyName}}
+        </view>
+      </view>
+
+      <!-- 租客信息 -->
+      <view class="contract-tenant">
+        <view class="tenant-info">
+          <text class="tenant-name">{{item.tenantName}}</text>
+          <text class="tenant-phone privacy-mask">{{item.tenantPhone}}</text>
+        </view>
+      </view>
+
+      <!-- 合约周期 -->
+      <view class="contract-period">
+        <view class="period-item">
+          <text class="period-label">租期</text>
+          <text class="period-value">{{item.startDate}} 至 {{item.endDate}}</text>
+        </view>
+        <view class="period-item">
+          <text class="period-label">租金</text>
+          <text class="period-value text-danger">¥{{item.monthlyRent}}/月</text>
+        </view>
+      </view>
+
+      <!-- 剩余天数 -->
+      <view class="contract剩余" wx:if="{{item.status === 'active'}}">
+        <view class="remaining-days {{item.remainingDays <= 30 ? 'warning' : ''}}">
+          <text wx:if="{{item.remainingDays > 0}}">剩余 {{item.remainingDays}} 天</text>
+          <text wx:elif="{{item.remainingDays === 0}}">今日到期</text>
+          <text wx:else class="text-danger">已逾期 {{-item.remainingDays}} 天</text>
+        </view>
+      </view>
+
+      <view class="contract-arrow list-item-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{contractList.length === 0}}">
+    <text class="empty-state-icon">📄</text>
+    <text class="empty-state-text">暂无合约</text>
+    <button class="btn btn-primary" bindtap="goToAddContract" wx:if="{{isLandlord}}">
+      新建第一个合约
+    </button>
+  </view>
+
+  <!-- 添加按钮（仅房东显示） -->
+  <view class="add-btn" bindtap="goToAddContract" wx:if="{{isLandlord && contractList.length > 0}}">
+    <text class="add-btn-icon">+</text>
+  </view>
+</view>

@@ -1,0 +1,282 @@
+/* 支出账单列表页面 - 样式文件 */
+
+/* 汇总卡片 */
+.expense-summary {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.summary-card {
+  flex: 1;
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  text-align: center;
+}
+
+.summary-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-bottom: 8rpx;
+}
+
+.summary-value {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* 筛选栏 */
+.filter-bar {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.filter-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 16rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-input);
+  transition: all 0.2s ease;
+}
+
+.filter-item:active {
+  background: var(--secondary-gray);
+}
+
+.filter-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+.filter-text.placeholder {
+  color: var(--text-placeholder);
+}
+
+.filter-arrow {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* 支出列表 */
+.expense-list {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+  transition: background 0.2s ease;
+}
+
+.expense-item:last-child {
+  border-bottom: none;
+}
+
+.expense-item:active {
+  background: var(--bg-hover);
+}
+
+/* 支出类型图标 */
+.expense-type-icon {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-lg);
+  margin-right: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.expense-type-icon.type-rent {
+  background: #FEF0F0;
+}
+
+.expense-type-icon.type-deposit {
+  background: #FDF6EC;
+}
+
+.expense-type-icon.type-water {
+  background: #E8F4FC;
+}
+
+.expense-type-icon.type-electric {
+  background: #FFF8E6;
+}
+
+.expense-type-icon.type-gas {
+  background: #FDF0F5;
+}
+
+.expense-type-icon.type-property {
+  background: #F0F9EB;
+}
+
+.expense-type-icon.type-repair {
+  background: #FFF0F5;
+}
+
+.expense-type-icon.type-other {
+  background: var(--secondary-gray);
+}
+
+/* 支出信息 */
+.expense-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.expense-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6rpx;
+}
+
+.expense-type-name {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.expense-amount {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--accent-red);
+}
+
+.expense-detail {
+  display: flex;
+  gap: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: 4rpx;
+}
+
+.expense-remark {
+  font-size: var(--font-size-xs);
+  color: var(--text-placeholder);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 箭头 */
+.expense-arrow {
+  flex-shrink: 0;
+  color: var(--text-placeholder);
+  font-size: var(--font-size-lg);
+}
+
+/* 添加按钮 */
+.add-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 200rpx;
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 8rpx 24rpx rgba(91, 155, 213, 0.4);
+  transition: transform 0.2s ease;
+  z-index: 100;
+}
+
+.add-btn:active {
+  transform: scale(0.9);
+}
+
+.add-btn-icon {
+  font-size: 60rpx;
+  color: #fff;
+  font-weight: 300;
+}
+
+/* 弹窗样式 */
+.picker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.picker-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.picker-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.picker-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.picker-close {
+  font-size: 48rpx;
+  color: var(--text-placeholder);
+  line-height: 1;
+}
+
+.picker-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-sm) 0;
+}
+
+.picker-item {
+  padding: var(--spacing-md);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.picker-item:active {
+  background: var(--secondary-gray);
+}
+
+.picker-item.selected {
+  color: var(--primary-color);
+  font-weight: 600;
+}

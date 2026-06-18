@@ -1,0 +1,332 @@
+/* 租客首页 - 样式文件 */
+
+/* 角色切换提示 */
+.role-tip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 32rpx;
+  background: var(--primary-light);
+  border-radius: var(--radius-card);
+  margin-bottom: var(--spacing-md);
+}
+
+.role-tip-text {
+  font-size: var(--font-size-sm);
+  color: var(--primary-color);
+}
+
+.role-tip-switch {
+  font-size: var(--font-size-sm);
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+/* 房源卡片（顶部） */
+.rental-card {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: 0 8rpx 24rpx -8rpx rgba(37, 99, 235, 0.3);
+}
+
+.rental-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.property-icon {
+  width: 72rpx;
+  height: 72rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  margin-right: var(--spacing-sm);
+}
+
+.property-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.property-name {
+  display: block;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.property-address {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.property-tag {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: var(--font-size-xs);
+  padding: 6rpx 16rpx;
+  border-radius: var(--radius-input);
+  flex-shrink: 0;
+}
+
+/* 房源卡片主体（房间信息） */
+.rental-body {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-input);
+  padding: var(--spacing-sm) var(--spacing-xs);
+  display: flex;
+  align-items: center;
+}
+
+.rental-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.rental-label {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 6rpx;
+}
+
+.rental-value {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: #fff;
+}
+
+.rental-divider {
+  width: 2rpx;
+  height: 48rpx;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.rental-footer {
+  margin-top: var(--spacing-sm);
+  text-align: center;
+}
+
+.rental-more {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 合约信息卡片 */
+.contract-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-card);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.card-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contract-status {
+  background: var(--success-color);
+  color: #fff;
+  font-size: var(--font-size-xs);
+  padding: 6rpx 20rpx;
+  border-radius: var(--radius-input);
+  font-weight: 500;
+}
+
+.contract-period {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.period-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-right: var(--spacing-sm);
+}
+
+.period-value {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.contract-remaining {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.remaining-left {
+  display: flex;
+  align-items: baseline;
+}
+
+.remaining-big {
+  font-size: 56rpx;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.remaining-unit {
+  font-size: var(--font-size-base);
+  color: var(--primary-color);
+  margin-left: 8rpx;
+  font-weight: 500;
+}
+
+.remaining-desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* 账单区域 */
+.bill-section {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-card);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-link {
+  font-size: var(--font-size-sm);
+  color: var(--primary-color);
+}
+
+.bill-grid {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.bill-grid .bill-card {
+  flex: 1;
+  background: var(--bg-page);
+  border-radius: var(--radius-input);
+  padding: var(--spacing-md) var(--spacing-sm);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.bill-grid .bill-card:active {
+  transform: scale(0.96);
+}
+
+.bill-grid .bill-count {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: var(--warn-color);
+  line-height: 1.2;
+}
+
+.bill-grid .bill-card-danger .bill-count {
+  color: var(--danger-color);
+}
+
+.bill-grid .bill-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin: 8rpx 0;
+}
+
+.bill-grid .bill-amount {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* 快捷入口 */
+.quick-menu {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  display: flex;
+  justify-content: space-around;
+  box-shadow: var(--shadow-card);
+}
+
+.quick-menu .menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: var(--spacing-xs) var(--spacing-md);
+  transition: transform 0.2s ease;
+}
+
+.quick-menu .menu-item:active {
+  transform: scale(0.95);
+}
+
+.quick-menu .menu-icon {
+  width: 72rpx;
+  height: 72rpx;
+  background: var(--primary-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+}
+
+.quick-menu .menu-title {
+  font-size: var(--font-size-xs);
+  color: var(--text-primary);
+}
+
+.quick-menu .menu-badge {
+  position: absolute;
+  top: 4rpx;
+  right: 24rpx;
+  min-width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  padding: 0 8rpx;
+  background: var(--danger-color);
+  color: #fff;
+  font-size: 20rpx;
+  text-align: center;
+  border-radius: 16rpx;
+}
+
+/* 通用文本工具类 */
+.text-primary-color {
+  color: #fff;
+}

@@ -1,0 +1,248 @@
+/* 押金结算弹窗组件 - 样式文件 */
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  width: 640rpx;
+  max-height: 80vh;
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.modal-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  font-size: 48rpx;
+  color: var(--text-placeholder);
+  line-height: 1;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+}
+
+/* 押金信息 */
+.deposit-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.deposit-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.deposit-amount {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* 表单项 */
+.form-item {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.form-label.required::before {
+  content: '*';
+  color: var(--accent-red);
+  margin-right: 6rpx;
+}
+
+/* 类型选择 */
+.type-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+}
+
+.type-option {
+  padding: var(--spacing-md);
+  background: var(--secondary-gray);
+  border-radius: var(--radius-button);
+  text-align: center;
+  border: 4rpx solid transparent;
+  transition: all 0.2s ease;
+}
+
+.type-option.selected {
+  background: var(--primary-light);
+  border-color: var(--primary-color);
+}
+
+.type-icon {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border-radius: 50%;
+  margin: 0 auto var(--spacing-xs);
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+}
+
+.type-option.selected .type-icon {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.type-name {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4rpx;
+}
+
+.type-desc {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* 金额输入 */
+.amount-input {
+  display: flex;
+  align-items: center;
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  padding-left: var(--spacing-md);
+}
+
+.amount-prefix {
+  font-size: var(--font-size-lg);
+  color: var(--accent-red);
+  font-weight: 600;
+}
+
+.amount-value {
+  flex: 1;
+  height: 80rpx;
+  padding: 0 var(--spacing-md);
+  background: transparent !important;
+  border: none !important;
+}
+
+.form-tip {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+/* 扣费项 */
+.deduction-items {
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  padding: var(--spacing-sm);
+}
+
+.deduction-item {
+  padding: var(--spacing-sm);
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.deduction-item:last-of-type {
+  border-bottom: none;
+}
+
+.deduction-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4rpx;
+}
+
+.deduction-name {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+.deduction-amount {
+  font-size: var(--font-size-sm);
+  color: var(--accent-red);
+}
+
+.add-deduction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: var(--spacing-sm);
+  color: var(--primary-color);
+  font-size: var(--font-size-sm);
+}
+
+.add-icon {
+  font-size: var(--font-size-base);
+}
+
+/* 备注输入 */
+.remark-input {
+  width: 100%;
+  min-height: 100rpx;
+  padding: var(--spacing-md);
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  box-sizing: border-box;
+  border: 2rpx solid transparent;
+}
+
+.remark-input:focus {
+  border-color: var(--primary-color);
+}
+
+/* 底部按钮 */
+.modal-footer {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border-top: 1rpx solid var(--border-light);
+}
+
+.modal-footer .btn {
+  flex: 1;
+}

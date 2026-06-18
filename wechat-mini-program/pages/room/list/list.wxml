@@ -1,0 +1,151 @@
+<!--
+  房间列表页面
+  功能说明：展示所有房间，支持按状态、房源、租金等多维度筛选
+  交互逻辑：支持列表/卡片视图切换，点击跳转详情
+  特殊业务限制：
+    - 租客端仅展示个人承租房间
+    - 已出租房间计费规则不可修改（计费锁机）
+-->
+<view class="page-container">
+  <!-- 顶部统计 -->
+  <view class="room-stats">
+    <view class="stat-item" bindtap="onFilterStatus" data-status="all">
+      <view class="stat-num">{{stats.totalCount}}</view>
+      <view class="stat-label">全部房间</view>
+    </view>
+    <view class="stat-item" bindtap="onFilterStatus" data-status="rented">
+      <view class="stat-num text-success">{{stats.rentedCount}}</view>
+      <view class="stat-label">已出租</view>
+    </view>
+    <view class="stat-item" bindtap="onFilterStatus" data-status="vacant">
+      <view class="stat-num">{{stats.vacantCount}}</view>
+      <view class="stat-label">空置中</view>
+    </view>
+    <view class="stat-item" bindtap="onFilterStatus" data-status="expiring">
+      <view class="stat-num text-warning">{{stats.expiringCount}}</view>
+      <view class="stat-label">即将到期</view>
+    </view>
+  </view>
+
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <view class="filter-item" bindtap="onShowPropertyPicker">
+      <text class="filter-text {{selectedPropertyId ? '' : 'placeholder'}}">
+        {{selectedPropertyName || '全部房源'}}
+      </text>
+      <text class="filter-arrow">▼</text>
+    </view>
+    <view class="filter-item" bindtap="onShowSortPicker">
+      <text class="filter-text">{{sortName}}</text>
+      <text class="filter-arrow">▼</text>
+    </view>
+    <view class="filter-item filter-search" bindtap="onShowSearch">
+      <text class="filter-icon">🔍</text>
+    </view>
+  </view>
+
+  <!-- 房间列表 -->
+  <view class="room-list">
+    <view
+      wx:for="{{roomList}}"
+      wx:key="id"
+      class="room-item"
+      bindtap="goToDetail"
+      data-id="{{item.id}}"
+    >
+      <!-- 房间图片 -->
+      <view class="room-image">
+        <image
+          wx:if="{{item.images.length > 0}}"
+          src="{{item.images[0]}}"
+          mode="aspectFill"
+        />
+        <view wx:else class="room-image-placeholder">暂无图片</view>
+        <!-- 状态标签 -->
+        <view class="room-status-tag {{item.statusClass}}">{{item.statusName}}</view>
+        <!-- 即将到期标签 -->
+        <view class="room-expiring-tag" wx:if="{{item.isExpiringSoon}}">即将到期</view>
+      </view>
+
+      <!-- 房间信息 -->
+      <view class="room-info">
+        <view class="room-header">
+          <text class="room-name">{{item.roomName}}</text>
+          <text class="room-monthlyRent">¥{{item.monthlyRent}}/月</text>
+        </view>
+        <view class="room-property text-secondary text-sm">
+          {{item.propertyName}} · {{item.propertyAddress}}
+        </view>
+        <view class="room-tenant" wx:if="{{item.status === 'rented'}}">
+          <text class="tenant-name">{{item.tenantName}}</text>
+          <text class="tenant-phone privacy-mask">{{item.tenantPhone}}</text>
+        </view>
+        <view class="room-contract" wx:if="{{item.contract}}">
+          <text class="contract-period">租期：{{item.contract.startDate}} 至 {{item.contract.endDate}}</text>
+        </view>
+      </view>
+
+      <view class="room-arrow list-item-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{roomList.length === 0}}">
+    <text class="empty-state-icon">🚪</text>
+    <text class="empty-state-text">暂无房间</text>
+    <button class="btn btn-primary" bindtap="goToAddRoom" wx:if="{{isLandlord}}">
+      添加第一个房间
+    </button>
+  </view>
+
+  <!-- 添加按钮（仅房东显示） -->
+  <view class="add-btn" bindtap="goToAddRoom" wx:if="{{isLandlord && roomList.length > 0}}">
+    <text class="add-btn-icon">+</text>
+  </view>
+</view>
+
+<!-- 房源选择弹窗 -->
+<view class="picker-modal" wx:if="{{showPropertyPicker}}">
+  <view class="picker-mask" bindtap="onClosePropertyPicker"></view>
+  <view class="picker-content modal">
+    <view class="picker-header">
+      <text class="picker-title">选择房源</text>
+      <text class="picker-close" bindtap="onClosePropertyPicker">×</text>
+    </view>
+    <scroll-view scroll-y class="picker-list">
+      <view
+        class="picker-item {{selectedPropertyId === item.id ? 'selected' : ''}}"
+        wx:for="{{propertyList}}"
+        wx:key="id"
+        bindtap="onSelectProperty"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+      >
+        {{item.name}}
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<!-- 排序选择弹窗 -->
+<view class="picker-modal" wx:if="{{showSortPicker}}">
+  <view class="picker-mask" bindtap="onCloseSortPicker"></view>
+  <view class="picker-content modal">
+    <view class="picker-header">
+      <text class="picker-title">排序方式</text>
+      <text class="picker-close" bindtap="onCloseSortPicker">×</text>
+    </view>
+    <view class="picker-list">
+      <view
+        class="picker-item {{currentSort === item.id ? 'selected' : ''}}"
+        wx:for="{{sortOptions}}"
+        wx:key="id"
+        bindtap="onSelectSort"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+</view>

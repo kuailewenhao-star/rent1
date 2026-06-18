@@ -1,0 +1,54 @@
+name: Mobile App (H5) CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'release/**'
+    paths:
+      - 'mobile-app/**'
+      - '.github/workflows/mobile-app-ci.yml'
+  pull_request:
+    branches:
+      - main
+      - develop
+      - 'release/**'
+    paths:
+      - 'mobile-app/**'
+      - '.github/workflows/mobile-app-ci.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: 构建与校验
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: mobile-app/package-lock.json
+
+      - name: 安装依赖
+        working-directory: ./mobile-app
+        run: npm ci
+
+      - name: 生产构建
+        working-directory: ./mobile-app
+        env:
+          NODE_ENV: production
+        run: npm run build
+
+      - name: 上传构建产物
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-app-dist
+          path: mobile-app/dist/
+          retention-days: 7

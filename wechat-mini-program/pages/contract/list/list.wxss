@@ -1,0 +1,220 @@
+/* 合约列表页面 - 样式文件 */
+
+/* 状态标签 */
+.status-tabs {
+  display: flex;
+  gap: var(--spacing-sm);
+  overflow-x: auto;
+  padding: var(--spacing-sm) 0;
+  margin-bottom: var(--spacing-sm);
+  -webkit-overflow-scrolling: touch;
+}
+
+.status-tab {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 16rpx 24rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  border: 2rpx solid transparent;
+  transition: all 0.2s ease;
+}
+
+.status-tab.active {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.tab-count {
+  min-width: 36rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: var(--font-size-xs);
+  border-radius: 20rpx;
+  padding: 0 8rpx;
+}
+
+.status-tab.active .tab-count {
+  background: var(--primary-dark);
+}
+
+/* 合约列表 */
+.contract-list {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.contract-item {
+  position: relative;
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+  transition: background 0.2s ease;
+}
+
+.contract-item:last-child {
+  border-bottom: none;
+}
+
+.contract-item:active {
+  background: var(--bg-hover);
+}
+
+/* 合约头部 */
+.contract-header {
+  margin-bottom: var(--spacing-sm);
+}
+
+.contract-room {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: 6rpx;
+}
+
+.room-name {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contract-property {
+  margin-top: 4rpx;
+}
+
+/* 状态标签 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+}
+
+.tag-active {
+  background: #F0F9EB;
+  color: var(--accent-green);
+}
+
+.tag-expired {
+  background: var(--secondary-gray);
+  color: var(--text-secondary);
+}
+
+.tag-terminated {
+  background: #FDF6EC;
+  color: var(--accent-orange);
+}
+
+.tag-cancelled {
+  background: #FEF0F0;
+  color: var(--accent-red);
+}
+
+/* 租客信息 */
+.contract-tenant {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.tenant-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.tenant-name {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+.tenant-phone {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* 合约周期 */
+.contract-period {
+  display: flex;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-sm) 0;
+  border-top: 1rpx solid var(--border-light);
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.period-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.period-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.period-value {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+/* 剩余天数 */
+.contract-remaining {
+  margin-top: var(--spacing-sm);
+}
+
+.remaining-days {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.remaining-days.warning {
+  color: var(--accent-orange);
+}
+
+/* 箭头 */
+.contract-arrow {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-placeholder);
+  font-size: var(--font-size-lg);
+}
+
+/* 添加按钮 */
+.add-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 200rpx;
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 8rpx 24rpx rgba(91, 155, 213, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.add-btn:active {
+  transform: scale(0.9);
+}
+
+.add-btn-icon {
+  font-size: 60rpx;
+  color: #fff;
+  font-weight: 300;
+}

@@ -1,0 +1,116 @@
+<!--
+  房源列表页面
+  功能说明：展示房东所有房源，支持状态筛选、视图切换
+  交互逻辑：点击房源卡片跳转详情，长按显示操作菜单
+  特殊业务限制：租客端不可见此页面
+-->
+<view class="page-container">
+  <!-- 视图切换和筛选 -->
+  <view class="list-toolbar">
+    <!-- 状态筛选 -->
+    <view class="filter-tabs">
+      <view
+        wx:for="{{statusFilters}}"
+        wx:key="id"
+        class="filter-tab {{currentStatus === item.id ? 'active' : ''}}"
+        bindtap="onStatusChange"
+        data-id="{{item.id}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+
+    <!-- 视图切换 -->
+    <view class="view-toggle">
+      <view
+        class="view-btn {{viewMode === 'list' ? 'active' : ''}}"
+        bindtap="onViewChange"
+        data-mode="list"
+      >
+        <text class="icon">☰</text>
+      </view>
+      <view
+        class="view-btn {{viewMode === 'card' ? 'active' : ''}}"
+        bindtap="onViewChange"
+        data-mode="card"
+      >
+        <text class="icon">▦</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 列表视图 -->
+  <view class="property-list" wx:if="{{viewMode === 'list'}}">
+    <view
+      wx:for="{{propertyList}}"
+      wx:key="id"
+      class="property-item"
+      bindtap="goToDetail"
+      data-id="{{item.id}}"
+    >
+      <view class="property-info">
+        <view class="property-header">
+          <text class="property-name">{{item.name}}</text>
+          <view class="property-status tag {{item.bizStatusClass}}">{{item.bizStatusName}}</view>
+        </view>
+        <view class="property-address text-secondary text-sm">
+          {{item.province}}{{item.city}}{{item.district}}{{item.address}}
+        </view>
+        <view class="property-meta">
+          <text class="property-type text-xs">{{item.typeName}}</text>
+          <text class="property-rooms text-xs">共{{item.roomCount}}间</text>
+          <text class="property-period text-xs">租期：{{item.rentStartDate}} 至 {{item.rentEndDate}}</text>
+        </view>
+      </view>
+      <view class="property-arrow list-item-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 卡片视图 -->
+  <view class="property-cards" wx:if="{{viewMode === 'card'}}">
+    <view
+      wx:for="{{propertyList}}"
+      wx:key="id"
+      class="property-card"
+      bindtap="goToDetail"
+      data-id="{{item.id}}"
+    >
+      <view class="card-status-bar {{item.bizStatusClass}}"></view>
+      <view class="card-content">
+        <view class="card-header">
+          <text class="card-title">{{item.name}}</text>
+          <view class="tag {{item.bizStatusClass}}">{{item.bizStatusName}}</view>
+        </view>
+        <view class="card-address text-secondary text-sm">
+          {{item.city}}{{item.district}}
+        </view>
+        <view class="card-stats">
+          <view class="card-stat">
+            <text class="stat-num">{{item.roomCount}}</text>
+            <text class="stat-label">房间</text>
+          </view>
+          <view class="card-stat">
+            <text class="stat-num text-success">{{item.rentedCount}}</text>
+            <text class="stat-label">已租</text>
+          </view>
+          <view class="card-stat">
+            <text class="stat-num">{{item.vacantCount}}</text>
+            <text class="stat-label">空置</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{propertyList.length === 0}}">
+    <text class="empty-state-icon">🏠</text>
+    <text class="empty-state-text">暂无房源</text>
+    <button class="btn btn-primary" bindtap="goToAddProperty">添加第一个房源</button>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="goToAddProperty" wx:if="{{propertyList.length > 0}}">
+    <text class="add-btn-icon">+</text>
+  </view>
+</view>

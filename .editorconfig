@@ -1,0 +1,123 @@
+# ============================================
+# EditorConfig - 编辑器配置
+# 跨编辑器/IDE 统一代码风格
+# https://editorconfig.org
+# ============================================
+
+# 根目录标记（向上查找时到此停止）
+root = true
+
+# ============================================
+# 所有文件通用规则
+# ============================================
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 120
+
+# ============================================
+# Java / XML / YAML
+# ============================================
+[*.java]
+indent_style = space
+indent_size = 4
+
+[*.xml]
+indent_style = space
+indent_size = 4
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.properties]
+charset = utf-8
+
+# ============================================
+# TypeScript / JavaScript / Vue
+# ============================================
+[*.{ts,tsx,js,jsx,vue}]
+indent_style = space
+indent_size = 2
+max_line_length = 120
+
+# ============================================
+# JSON
+# ============================================
+[*.{json,jsonc}]
+indent_style = space
+indent_size = 2
+
+# ============================================
+# CSS / SCSS
+# ============================================
+[*.{css,scss,sass,less}]
+indent_style = space
+indent_size = 2
+
+# ============================================
+# HTML / Markdown
+# ============================================
+[*.html]
+indent_style = space
+indent_size = 2
+
+[*.md]
+indent_style = space
+indent_size = 2
+max_line_length = 120
+trim_trailing_whitespace = false
+
+# ============================================
+# SQL / Shell
+# ============================================
+[*.sql]
+indent_style = space
+indent_size = 2
+
+[*.sh]
+indent_style = space
+indent_size = 2
+
+# ============================================
+# Windows 批处理
+# ============================================
+[*.{bat,cmd}]
+end_of_line = crlf
+indent_style = space
+indent_size = 2
+
+[*.ps1]
+end_of_line = crlf
+indent_style = space
+indent_size = 2
+
+# ============================================
+# 微信小程序
+# ============================================
+[*.{wxml,wxss,wxs}]
+indent_style = space
+indent_size = 2
+
+# ============================================
+# Dockerfile / Makefile
+# ============================================
+[Dockerfile]
+indent_style = space
+indent_size = 2
+
+[Makefile]
+indent_style = tab
+
+# ============================================
+# 锁文件 - 不自动格式化
+# ============================================
+[package-lock.json]
+max_line_length = off
+
+[yarn.lock]
+max_line_length = off

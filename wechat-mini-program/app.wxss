@@ -1,0 +1,417 @@
+/* ================================================
+   房东租赁管理系统 V1.0 - 全局公共样式
+   设计规范：清新扁平极简风
+   ================================================ */
+
+/* ---------- CSS变量定义（全局统一，对齐H5规范）---------- */
+page {
+  /* 主色调 - 品牌蓝 (对齐H5: #2563EB / #1D4ED8) */
+  --primary-color: #2563EB;
+  --primary-light: #EFF6FF;
+  --primary-dark: #1D4ED8;
+
+  /* 状态色 (对齐H5: #16A34A / #F59E0B / #DC2626) */
+  --success-color: #16A34A;
+  --success-soft: #ECFDF5;
+  --warn-color: #F59E0B;
+  --warn-soft: #FFFBEB;
+  --danger-color: #DC2626;
+  --danger-soft: #FEF2F2;
+
+  /* 兼容原有变量名（避免页面引用失效） */
+  --secondary-gray: #F5F7FA;
+  --secondary-light-gray: #64748B;
+  --accent-green: #16A34A;
+  --accent-red: #DC2626;
+  --accent-orange: #F59E0B;
+
+  /* 文字颜色 (对齐H5: #1E293B / #64748B / #94A3B8) */
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --text-placeholder: #94A3B8;
+
+  /* 边框/分割线 */
+  --border-color: #E2E8F0;
+  --border-light: #F1F5F9;
+  --divider-color: #E2E8F0;
+
+  /* 背景色 (对齐H5: #F8FAFC) */
+  --bg-page: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-hover: #F8FAFC;
+
+  /* 圆角规范（对齐H5：卡片20px / 按钮16px / 图标容器12px） */
+  --radius-card: 40rpx;      /* 内容卡片、列表容器 20px */
+  --radius-button: 32rpx;    /* 功能按钮 16px */
+  --radius-input: 24rpx;     /* 输入框、筛选标签 12px */
+
+  /* 兼容原变量名 */
+  --radius-btn: 32rpx;
+
+  /* 间距规范（对齐H5 Tailwind scale: 8/16/24/32/48） */
+  --spacing-xs: 16rpx;       /* 8px */
+  --spacing-sm: 24rpx;       /* 12px */
+  --spacing-md: 32rpx;       /* 16px */
+  --spacing-lg: 48rpx;       /* 24px */
+  --spacing-xl: 64rpx;       /* 32px */
+
+  /* 字体大小（对齐H5） */
+  --font-size-xs: 22rpx;
+  --font-size-sm: 26rpx;
+  --font-size-base: 30rpx;
+  --font-size-lg: 34rpx;
+  --font-size-xl: 40rpx;
+  --font-size-xxl: 56rpx;
+
+  /* 阴影（对齐H5柔和阴影） */
+  --shadow-card: 0 4rpx 16rpx -4rpx rgba(0, 0, 0, 0.08);
+  --shadow-button: 0 4rpx 16rpx -4rpx rgba(37, 99, 235, 0.3);
+}
+
+/* ---------- 全局基础样式重置 ---------- */
+page {
+  background-color: var(--bg-page);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ---------- 通用容器 ---------- */
+.container {
+  padding: var(--spacing-md);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ---------- 卡片样式 ---------- */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-card);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.card-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ---------- 按钮样式 ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 40rpx;
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.96);
+  opacity: 0.9;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-button);
+}
+
+.btn-primary.disabled {
+  background: var(--secondary-light-gray);
+  box-shadow: none;
+}
+
+.btn-default {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 2rpx solid var(--border-color);
+}
+
+.btn-text {
+  background: transparent;
+  color: var(--primary-color);
+  padding: 10rpx 20rpx;
+}
+
+/* ---------- 输入框样式 ---------- */
+.input {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 var(--spacing-md);
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  border: 2rpx solid transparent;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  border-color: var(--primary-color);
+  background: var(--bg-card);
+}
+
+.input::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* ---------- 列表样式 ---------- */
+.list {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+  transition: background 0.2s ease;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item:active {
+  background: var(--bg-hover);
+}
+
+.list-item-content {
+  flex: 1;
+}
+
+.list-item-title {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  margin-bottom: 6rpx;
+}
+
+.list-item-desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.list-item-arrow {
+  color: var(--text-placeholder);
+  font-size: var(--font-size-sm);
+}
+
+/* ---------- 分割线 ---------- */
+.divider {
+  height: 1rpx;
+  background: var(--divider-color);
+  margin: var(--spacing-md) 0;
+}
+
+/* ---------- 状态标签 ---------- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+}
+
+.tag-primary {
+  background: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.tag-success {
+  background: #F0F9EB;
+  color: var(--accent-green);
+}
+
+.tag-warning {
+  background: #FDF6EC;
+  color: var(--accent-orange);
+}
+
+.tag-danger {
+  background: #FEF0F0;
+  color: var(--accent-red);
+}
+
+.tag-gray {
+  background: var(--secondary-gray);
+  color: var(--text-secondary);
+}
+
+/* ---------- 空状态样式 ---------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+}
+
+.empty-state-icon {
+  font-size: 120rpx;
+  color: var(--text-placeholder);
+  margin-bottom: var(--spacing-md);
+}
+
+.empty-state-text {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ---------- 弹窗动画 ---------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal {
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* ---------- 页面标题 ---------- */
+.page-header {
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+  background: var(--bg-card);
+}
+
+.page-title {
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ---------- 统计数据卡片 ---------- */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-md);
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+}
+
+.stat-value {
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6rpx;
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.stat-card-primary .stat-value {
+  color: var(--primary-color);
+}
+
+.stat-card-success .stat-value {
+  color: var(--accent-green);
+}
+
+.stat-card-danger .stat-value {
+  color: var(--accent-red);
+}
+
+/* ---------- Flex布局工具 ---------- */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+/* ---------- 间距工具 ---------- */
+.mt-xs { margin-top: var(--spacing-xs); }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+
+.mb-xs { margin-bottom: var(--spacing-xs); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+.ml-xs { margin-left: var(--spacing-xs); }
+.ml-sm { margin-left: var(--spacing-sm); }
+.ml-md { margin-left: var(--spacing-md); }
+
+.mr-xs { margin-right: var(--spacing-xs); }
+.mr-sm { margin-right: var(--spacing-sm); }
+.mr-md { margin-right: var(--spacing-md); }
+
+/* ---------- 文字工具 ---------- */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-placeholder { color: var(--text-placeholder); }
+.text-primary-color { color: var(--primary-color); }
+.text-success { color: var(--accent-green); }
+.text-danger { color: var(--accent-red); }
+.text-warning { color: var(--accent-orange); }
+
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-bold { font-weight: 600; }
+
+/* ---------- 安全脱敏样式 ---------- */
+.privacy-mask {
+  letter-spacing: 1rpx;
+}

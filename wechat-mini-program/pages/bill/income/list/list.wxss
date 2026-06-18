@@ -1,0 +1,391 @@
+/* 收入账单列表页面 - 样式文件 */
+
+/* 状态筛选 */
+.status-filter {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.filter-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 16rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.filter-btn.active {
+  background: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.filter-count {
+  min-width: 32rpx;
+  height: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: var(--font-size-xs);
+  border-radius: 50%;
+  padding: 0 6rpx;
+}
+
+.filter-btn.active .filter-count {
+  background: var(--primary-dark);
+}
+
+/* 时间筛选 */
+.time-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.time-tabs {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.time-tab {
+  padding: 10rpx 20rpx;
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.time-tab.active {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.custom-time {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 10rpx 16rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.custom-icon {
+  font-size: var(--font-size-sm);
+}
+
+/* 汇总信息 */
+.bill-summary {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.summary-item {
+  flex: 1;
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  text-align: center;
+}
+
+.summary-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-bottom: 8rpx;
+}
+
+.summary-value {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+/* 账单列表 */
+.bill-list {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.bill-item {
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+  transition: background 0.2s ease;
+}
+
+.bill-item:last-child {
+  border-bottom: none;
+}
+
+.bill-item:active {
+  background: var(--bg-hover);
+}
+
+/* 账单头部 */
+.bill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.bill-type {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.type-icon {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-base);
+}
+
+.type-icon.type-rent {
+  background: #F0F9EB;
+}
+
+.type-icon.type-deposit {
+  background: #FDF6EC;
+}
+
+.type-icon.type-water {
+  background: #E8F4FC;
+}
+
+.type-icon.type-electric {
+  background: #FFF8E6;
+}
+
+.type-icon.type-gas {
+  background: #FDF0F5;
+}
+
+.type-icon.type-other {
+  background: var(--secondary-gray);
+}
+
+.type-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.type-name {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.type-cycle {
+  margin-top: 2rpx;
+}
+
+.bill-amount {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.bill-amount.pending {
+  color: var(--accent-orange);
+}
+
+.bill-amount.paid {
+  color: var(--accent-green);
+}
+
+.bill-amount.overdue {
+  color: var(--accent-red);
+}
+
+/* 账单详情 */
+.bill-detail {
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6rpx 0;
+}
+
+.detail-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.detail-value {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+/* 账单底部 */
+.bill-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bill-status {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: var(--font-size-sm);
+}
+
+.status-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+}
+
+.bill-status.pending {
+  color: var(--accent-orange);
+}
+
+.bill-status.pending .status-dot {
+  background: var(--accent-orange);
+}
+
+.bill-status.paid {
+  color: var(--accent-green);
+}
+
+.bill-status.paid .status-dot {
+  background: var(--accent-green);
+}
+
+.bill-status.overdue {
+  color: var(--accent-red);
+}
+
+.bill-status.overdue .status-dot {
+  background: var(--accent-red);
+}
+
+/* 添加按钮 */
+.add-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 200rpx;
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 8rpx 24rpx rgba(91, 155, 213, 0.4);
+  transition: transform 0.2s ease;
+  z-index: 100;
+}
+
+.add-btn:active {
+  transform: scale(0.9);
+}
+
+.add-btn-icon {
+  font-size: 60rpx;
+  color: #fff;
+  font-weight: 300;
+}
+
+/* 弹窗样式 */
+.picker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.picker-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.picker-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+}
+
+.picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.picker-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.picker-close {
+  font-size: 48rpx;
+  color: var(--text-placeholder);
+  line-height: 1;
+}
+
+.picker-body {
+  padding: var(--spacing-md);
+}
+
+.time-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.time-option {
+  padding: var(--spacing-md);
+  background: var(--secondary-gray);
+  border-radius: var(--radius-input);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.time-option.selected {
+  background: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.custom-option {
+  padding: var(--spacing-md);
+  background: var(--primary-light);
+  border-radius: var(--radius-input);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--primary-color);
+}

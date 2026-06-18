@@ -1,0 +1,241 @@
+/* 房源列表页面 - 样式文件 */
+
+/* 工具栏 */
+.list-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* 筛选标签 */
+.filter-tabs {
+  display: flex;
+  gap: var(--spacing-sm);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-tab {
+  flex-shrink: 0;
+  padding: 12rpx 24rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  border: 2rpx solid transparent;
+  transition: all 0.2s ease;
+}
+
+.filter-tab.active {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* 视图切换 */
+.view-toggle {
+  display: flex;
+  gap: 8rpx;
+}
+
+.view-btn {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border-radius: var(--radius-input);
+  color: var(--text-placeholder);
+  transition: all 0.2s ease;
+}
+
+.view-btn.active {
+  background: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.view-btn .icon {
+  font-size: var(--font-size-base);
+}
+
+/* 列表项 */
+.property-list {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.property-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1rpx solid var(--border-light);
+  transition: background 0.2s ease;
+}
+
+.property-item:last-child {
+  border-bottom: none;
+}
+
+.property-item:active {
+  background: var(--bg-hover);
+}
+
+.property-info {
+  flex: 1;
+}
+
+.property-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: 8rpx;
+}
+
+.property-name {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.property-address {
+  margin-bottom: 10rpx;
+  line-height: 1.4;
+}
+
+.property-meta {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.property-meta text {
+  color: var(--text-secondary);
+}
+
+/* 卡片视图 */
+.property-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+}
+
+.property-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease;
+}
+
+.property-card:active {
+  transform: scale(0.98);
+}
+
+.card-status-bar {
+  height: 8rpx;
+}
+
+.card-status-bar.tag-normal {
+  background: var(--accent-green);
+}
+
+.card-status-bar.tag-expired {
+  background: var(--accent-orange);
+}
+
+.card-status-bar.tag-terminated {
+  background: var(--text-secondary);
+}
+
+.card-content {
+  padding: var(--spacing-md);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  margin-right: var(--spacing-xs);
+}
+
+.card-address {
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-stats {
+  display: flex;
+  justify-content: space-around;
+  padding-top: var(--spacing-sm);
+  border-top: 1rpx solid var(--border-light);
+}
+
+.card-stat {
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4rpx;
+}
+
+.stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* 状态标签颜色 */
+.tag-normal {
+  background: #F0F9EB;
+  color: var(--accent-green);
+}
+
+.tag-expired {
+  background: #FDF6EC;
+  color: var(--accent-orange);
+}
+
+.tag-terminated {
+  background: var(--secondary-gray);
+  color: var(--text-secondary);
+}
+
+/* 添加按钮 */
+.add-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 200rpx;
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 8rpx 24rpx rgba(91, 155, 213, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.add-btn:active {
+  transform: scale(0.9);
+}
+
+.add-btn-icon {
+  font-size: 60rpx;
+  color: #fff;
+  font-weight: 300;
+}

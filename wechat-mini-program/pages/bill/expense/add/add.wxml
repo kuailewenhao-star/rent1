@@ -1,0 +1,115 @@
+<!--
+  添加支出账单页面
+  功能说明：录入支出账单，选择固定费用类型枚举
+  交互逻辑：选择房源、费用类型、金额、时间
+  特殊业务限制：
+    - 仅房东端可用
+    - 费用类型仅支持下拉选择（10类固定枚举）
+    - 无账单状态，仅台账记录
+    - 关联房源ID+房东用户ID
+-->
+<view class="page-container">
+  <form bindsubmit="onSubmit">
+    <!-- 房源选择 -->
+    <view class="form-section">
+      <view class="form-section-title">基本信息</view>
+
+      <view class="form-item">
+        <view class="form-label required">房源选择</view>
+        <picker
+          mode="selector"
+          range="{{propertyList}}"
+          range-key="name"
+          bindchange="onPropertyChange"
+          value="{{selectedPropertyIndex}}"
+        >
+          <view class="picker-value {{selectedPropertyIndex >= 0 ? '' : 'placeholder'}}">
+            {{selectedPropertyIndex >= 0 ? propertyList[selectedPropertyIndex].name : '请选择房源'}}
+          </view>
+        </picker>
+      </view>
+
+      <!-- 费用类型 -->
+      <view class="form-item">
+        <view class="form-label required">费用类型</view>
+        <picker
+          mode="selector"
+          range="{{expenseFeeTypes}}"
+          range-key="name"
+          bindchange="onFeeTypeChange"
+          value="{{selectedFeeTypeIndex}}"
+        >
+          <view class="picker-value {{selectedFeeTypeIndex >= 0 ? '' : 'placeholder'}}">
+            {{selectedFeeTypeIndex >= 0 ? expenseFeeTypes[selectedFeeTypeIndex].name : '请选择费用类型'}}
+          </view>
+        </picker>
+      </view>
+
+      <!-- 金额 -->
+      <view class="form-item">
+        <view class="form-label required">支出金额</view>
+        <view class="amount-input">
+          <text class="amount-prefix">¥</text>
+          <input
+            class="input amount-value"
+            type="digit"
+            name="amount"
+            placeholder="0.00"
+            value="{{formData.amount}}"
+          />
+        </view>
+      </view>
+
+      <!-- 支出时间 -->
+      <view class="form-item">
+        <view class="form-label required">支出时间</view>
+        <picker
+          mode="date"
+          bindchange="onDateChange"
+          value="{{formData.costDate}}"
+        >
+          <view class="picker-value {{formData.costDate ? '' : 'placeholder'}}">
+            {{formData.costDate || '请选择支出时间'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 备注信息 -->
+    <view class="form-section">
+      <view class="form-section-title">备注信息</view>
+
+      <view class="form-item">
+        <textarea
+          class="remark-input"
+          name="remark"
+          placeholder="请输入支出备注（选填）"
+          value="{{formData.remark}}"
+          maxlength="200"
+        ></textarea>
+        <view class="remark-count">{{formData.remark.length || 0}}/200</view>
+      </view>
+    </view>
+
+    <!-- 费用类型说明 -->
+    <view class="fee-type-tip">
+      <view class="tip-title">费用类型说明</view>
+      <view class="tip-content">
+        <view class="tip-item">房源租金支出：房东支付给大房东的整屋承租租金</view>
+        <view class="tip-item">房源押金支出：房东支付给大房东的承租保证金</view>
+        <view class="tip-item">其他费用类型为日常运营成本支出</view>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="form-actions">
+      <button
+        class="btn btn-primary btn-block"
+        form-type="submit"
+        disabled="{{!canSubmit}}"
+      >
+        确认录入
+      </button>
+    </view>
+  </form>
+</view>

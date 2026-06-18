@@ -1,0 +1,78 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/property/list/list",
+    "pages/property/add/add",
+    "pages/property/detail/detail",
+    "pages/room/list/list",
+    "pages/room/detail/detail",
+    "pages/room/add/add",
+    "pages/contract/list/list",
+    "pages/contract/add/add",
+    "pages/contract/detail/detail",
+    "pages/bill/income/list/list",
+    "pages/bill/income/detail/detail",
+    "pages/bill/expense/list/list",
+    "pages/bill/expense/add/add",
+    "pages/tenant/index/index",
+    "pages/tenant/contract/detail/detail",
+    "pages/tenant/bill/list/list",
+    "pages/message/list/list",
+    "pages/mine/mine",
+    "pages/login/login"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "房东租赁管理系统",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5F7FA",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#909399",
+    "selectedColor": "#5B9BD5",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/property/list/list",
+        "text": "房源",
+        "iconPath": "assets/tabbar/property.png",
+        "selectedIconPath": "assets/tabbar/property-active.png"
+      },
+      {
+        "pagePath": "pages/room/list/list",
+        "text": "房间",
+        "iconPath": "assets/tabbar/room.png",
+        "selectedIconPath": "assets/tabbar/room-active.png"
+      },
+      {
+        "pagePath": "pages/contract/list/list",
+        "text": "合约",
+        "iconPath": "assets/tabbar/contract.png",
+        "selectedIconPath": "assets/tabbar/contract-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/tabbar/mine.png",
+        "selectedIconPath": "assets/tabbar/mine-active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取您的位置信息以便提供更好的服务"
+    }
+  },
+  "requiredBackgroundModes": [],
+  "usingComponents": {},
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

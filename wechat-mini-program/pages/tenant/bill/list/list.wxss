@@ -1,0 +1,385 @@
+/* 租客账单列表 - 样式文件 */
+
+.page-container {
+  padding: var(--spacing-md);
+  background: var(--bg-page);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 状态筛选 */
+.status-filter {
+  display: flex;
+  gap: 12rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-card);
+}
+
+.filter-btn {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 12rpx;
+  border-radius: var(--radius-input);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  background: var(--bg-page);
+  transition: all 0.2s ease;
+}
+
+.filter-btn.active {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 500;
+}
+
+.filter-count {
+  margin-left: 6rpx;
+  font-size: 22rpx;
+  opacity: 0.8;
+}
+
+/* 汇总信息 */
+.bill-summary {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.summary-item {
+  flex: 1;
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.summary-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-bottom: 8rpx;
+}
+
+.summary-value {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--warn-color);
+}
+
+.summary-value.summary-danger {
+  color: var(--danger-color);
+}
+
+/* 账单列表 */
+.bill-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.bill-item {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease;
+}
+
+.bill-item:active {
+  transform: scale(0.98);
+}
+
+/* 账单头部 */
+.bill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+}
+
+.bill-type {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex: 1;
+  min-width: 0;
+}
+
+.type-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: var(--radius-input);
+  background: var(--primary-light);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.type-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.type-name {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4rpx;
+}
+
+.type-cycle {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.bill-amount {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-left: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.bill-amount.status-pending {
+  color: var(--warn-color);
+}
+
+.bill-amount.status-overdue {
+  color: var(--danger-color);
+}
+
+.bill-amount.status-paid {
+  color: var(--success-color);
+}
+
+/* 账单详情 */
+.bill-detail {
+  padding-top: var(--spacing-sm);
+  border-top: 1rpx solid var(--border-color);
+  padding-bottom: var(--spacing-sm);
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+  font-size: var(--font-size-xs);
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  color: var(--text-secondary);
+  width: 80rpx;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  color: var(--text-primary);
+  flex: 1;
+}
+
+/* 账单底部 */
+.bill-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--spacing-sm);
+  border-top: 1rpx solid var(--border-light);
+}
+
+.bill-status {
+  font-size: var(--font-size-xs);
+  padding: 6rpx 20rpx;
+  border-radius: var(--radius-input);
+  font-weight: 500;
+}
+
+.bill-status.status-pending {
+  background: #FFF7E6;
+  color: var(--warn-color);
+}
+
+.bill-status.status-paid {
+  background: #ECFDF5;
+  color: var(--success-color);
+}
+
+.bill-status.status-overdue {
+  background: #FEF2F2;
+  color: var(--danger-color);
+}
+
+.bill-date {
+  flex: 1;
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.bill-action {
+  background: var(--primary-color);
+  color: #fff;
+  font-size: var(--font-size-xs);
+  padding: 12rpx 28rpx;
+  border-radius: var(--radius-button);
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+
+.bill-action:active {
+  transform: scale(0.95);
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+}
+
+.empty-state-icon {
+  font-size: 120rpx;
+  color: var(--text-placeholder);
+  margin-bottom: var(--spacing-md);
+}
+
+.empty-state-text {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+/* 支付弹窗 */
+.picker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.picker-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  width: 100%;
+  background: var(--bg-card);
+  border-top-left-radius: var(--radius-card);
+  border-top-right-radius: var(--radius-card);
+  padding: var(--spacing-md);
+  position: relative;
+  animation: fadeInUp 0.25s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.modal-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  font-size: 48rpx;
+  color: var(--text-placeholder);
+  line-height: 1;
+}
+
+.modal-body {
+  text-align: center;
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.pay-amount {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.pay-type {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  margin-bottom: 6rpx;
+}
+
+.pay-period {
+  font-size: var(--font-size-sm);
+}
+
+.modal-footer {
+  padding-top: var(--spacing-md);
+}
+
+.pay-tip {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 48rpx;
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: #fff;
+  width: 100%;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}

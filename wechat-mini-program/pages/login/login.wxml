@@ -1,0 +1,92 @@
+<!--
+  登录页面
+  功能说明：微信一键授权登录，支持选择房东/租客身份
+  交互逻辑：微信授权后自动注册/登录，选择身份后进入对应首页
+-->
+<view class="login-container">
+  <!-- Logo区域 -->
+  <view class="logo-section">
+    <view class="logo">🏠</view>
+    <view class="app-name">房东租赁管理系统</view>
+    <view class="app-version">V1.0</view>
+  </view>
+
+  <!-- 功能介绍 -->
+  <view class="features-section">
+    <view class="feature-item">
+      <text class="feature-icon">📱</text>
+      <text class="feature-text">微信小程序，触手可及</text>
+    </view>
+    <view class="feature-item">
+      <text class="feature-icon">🔒</text>
+      <text class="feature-text">数据安全，隐私脱敏</text>
+    </view>
+    <view class="feature-item">
+      <text class="feature-icon">📊</text>
+      <text class="feature-text">经营数据，一目了然</text>
+    </view>
+  </view>
+
+  <!-- 登录按钮 -->
+  <view class="login-section">
+    <!-- 微信一键登录 -->
+    <button
+      class="btn btn-primary btn-login"
+      open-type="getPhoneNumber"
+      bindgetphonenumber="onGetPhoneNumber"
+    >
+      <text class="btn-icon">微信</text>
+      <text class="btn-text">微信一键登录</text>
+    </button>
+
+    <!-- 角色选择说明 -->
+    <view class="role-tip">
+      <text class="tip-text">登录后请选择您的身份</text>
+    </view>
+  </view>
+
+  <!-- 协议说明 -->
+  <view class="agreement-section">
+    <text class="agreement-text">
+      登录即表示同意
+      <text class="agreement-link" bindtap="onShowAgreement">《用户服务协议》</text>
+      和
+      <text class="agreement-link" bindtap="onShowPrivacy">《隐私政策》</text>
+    </text>
+  </view>
+</view>
+
+<!-- 身份选择弹窗 -->
+<view class="picker-modal" wx:if="{{showRolePicker}}">
+  <view class="picker-mask" bindtap="onCloseRolePicker"></view>
+  <view class="role-picker-content modal">
+    <view class="picker-header">
+      <text class="picker-title">选择登录身份</text>
+    </view>
+    <view class="picker-body">
+      <view class="role-intro">
+        <text>请选择您要使用的身份，不同身份将展示不同的功能和数据</text>
+      </view>
+      <view class="role-options">
+        <view
+          class="role-option"
+          bindtap="onSelectRole"
+          data-role="landlord"
+        >
+          <view class="role-icon">🏠</view>
+          <view class="role-name">我是房东</view>
+          <view class="role-desc">管理房源、房间、合约、账单</view>
+        </view>
+        <view
+          class="role-option"
+          bindtap="onSelectRole"
+          data-role="tenant"
+        >
+          <view class="role-icon">🏢</view>
+          <view class="role-name">我是租客</view>
+          <view class="role-desc">查看房间、合约、账单缴费</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

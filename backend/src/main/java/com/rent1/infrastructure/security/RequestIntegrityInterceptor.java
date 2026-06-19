@@ -2,7 +2,7 @@ package com.rent1.infrastructure.security;
 
 import com.rent1.domain.common.BusinessException;
 import com.rent1.infrastructure.security.annotation.RequestIntegrity;
-import com.rent1.infrastructure.cache.RedisService;
+import com.rent1.infrastructure.cache.CacheService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.HmacUtils;
@@ -43,7 +43,7 @@ public class RequestIntegrityInterceptor implements HandlerInterceptor {
     public static final String HEADER_NONCE = "X-Nonce";
     public static final String HEADER_SIGNATURE = "X-Signature";
 
-    private final RedisService redisService;
+    private final CacheService redisService;
 
     @Value("${request.security.signature-secret:rent1-default-signature-secret}")
     private String signatureSecret;

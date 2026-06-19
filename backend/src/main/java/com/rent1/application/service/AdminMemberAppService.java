@@ -6,7 +6,7 @@ import com.rent1.domain.common.MemberStatus;
 import com.rent1.domain.common.MemberType;
 import com.rent1.domain.member.Member;
 import com.rent1.domain.member.MemberRepository;
-import com.rent1.infrastructure.cache.RedisService;
+import com.rent1.infrastructure.cache.CacheService;
 import com.rent1.infrastructure.security.JwtService;
 import com.rent1.infrastructure.security.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class AdminMemberAppService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final RedisService redisService;
+    private final CacheService redisService;
 
     // 密码错误次数缓存key前缀
     private static final String PASSWORD_FAIL_PREFIX = "admin_password_fail:";

@@ -18,12 +18,14 @@ spring:
     port: ${REDIS_PORT:6379}
     password: ${REDIS_PASSWORD:}
     database: ${REDIS_DATABASE:0}
-    timeout: 3000ms
+    timeout: 1500ms
+    connect-timeout: 1500ms
     lettuce:
+      shutdown-timeout: 500ms
       pool:
-        max-active: 8
-        max-wait: -1ms
-        max-idle: 8
+        max-active: 4
+        max-wait: 1500ms
+        max-idle: 2
         min-idle: 0
 
 mybatis-plus:

@@ -10,7 +10,7 @@ import com.rent1.domain.member.Member;
 import com.rent1.domain.member.MemberContact;
 import com.rent1.domain.member.MemberDomainService;
 import com.rent1.domain.member.MemberContactDomainService;
-import com.rent1.infrastructure.cache.RedisService;
+import com.rent1.infrastructure.cache.CacheService;
 import com.rent1.infrastructure.security.DesensitizationService;
 import com.rent1.infrastructure.security.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class MemberAppService {
     private final MemberDomainService memberDomainService;
     private final MemberContactDomainService memberContactDomainService;
     private final JwtService jwtService;
-    private final RedisService redisService;
+    private final CacheService redisService;
 
     // 防重复注册锁的key前缀
     private static final String LOGIN_LOCK_PREFIX = "wechat_login:";

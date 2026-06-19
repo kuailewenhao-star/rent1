@@ -1,7 +1,7 @@
 package com.rent1.infrastructure.security;
 
 import com.rent1.domain.common.BusinessException;
-import com.rent1.infrastructure.cache.RedisService;
+import com.rent1.infrastructure.cache.CacheService;
 import com.rent1.infrastructure.security.annotation.Idempotent;
 import com.rent1.api.interceptor.AuthInterceptor;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,7 @@ public class IdempotentInterceptor implements HandlerInterceptor {
 
     private static final String LOCK_PREFIX = "idempotent:";
 
-    private final RedisService redisService;
+    private final CacheService redisService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {

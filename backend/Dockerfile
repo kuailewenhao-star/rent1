@@ -24,6 +24,9 @@ FROM openjdk:11-jre-slim
 
 WORKDIR /app
 
+# 安装 curl 用于健康检查（slim 镜像默认没有 curl）
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 # 从构建阶段复制 JAR 文件
 COPY --from=builder /app/target/rent-management-backend-1.0.0.jar app.jar
 
